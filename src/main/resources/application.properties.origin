@@ -1,0 +1,13 @@
+# write your own credentials in format "key=value" and remove ".origin" postfix in filename
+
+spring.datasource.driver-class-name=
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+
+spring.jpa.properties.hibernate.dialect=
+spring.jpa.properties.hibernate.show_sql=
+
+spring.mvc.hiddenmethod.filter.enabled=
+
+spring.messages.basename=

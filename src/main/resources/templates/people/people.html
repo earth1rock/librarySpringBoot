@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{uiText.title.people.people}">People</title>
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+<div th:each="person : ${people.getContent()}">
+	<a th:href="@{/people/person/{id}(id=${person.getId()})}" th:text="|${person.getFullName()}, ${person.getYearOfBirth()}|">User</a>
+</div>
+<hr>
+<div th:if="${people.getTotalPages() > 1}" class="pagination">
+	<a th:each="pageNumber : ${pageNumbers}"
+	   th:class="${pageNumber==people.getNumber() + 1} ? active"
+	   th:text="${pageNumber}"
+	   th:href="@{/people(page=${pageNumber}, people_per_page=${people.getSize()})}">Page</a>
+</div>
+<br>
+<a href="/people/new" th:text="#{uiText.button.person.create}">Create a person!</a>
+</body>
+</html>

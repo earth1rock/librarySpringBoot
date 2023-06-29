@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{uiText.title.books.books}">Books</title>
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+
+<div th:each="book : ${books.getContent()}">
+	<a th:href="@{/books/book/{id}(id=${book.getId()})}" th:text="|${book.getTitle()}, ${book.getAuthor()}, ${book.getYear()}|">Book</a>
+</div>
+<hr>
+<div th:if="${books.getTotalPages() > 1}" class="pagination">
+	<a th:each="pageNumber : ${pageNumbers}"
+	   th:class="${pageNumber==books.getNumber() + 1} ? active"
+	   th:text="${pageNumber}"
+	   th:href="@{/books(page=${pageNumber}, books_per_page=${books.getSize()}, sort_by_year=${books.getSort().isSorted()})}">Page</a>
+</div>
+<br>
+<a th:href="@{/books/new}" th:text="#{uiText.button.book.create}">Create a book!</a>
+<br>
+<a th:href="@{/books/search}" th:text="#{uiText.button.book.find}">Find a book!</a>
+</body>
+</html>

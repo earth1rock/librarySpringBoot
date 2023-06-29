@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{uiText.title.books.search}">Find a book</title>
+</head>
+<body>
+<form th:method="GET" th:action="@{search}">
+	<label for="title" th:text="#{uiText.label.book.title}">Book title: </label>
+	<input type="text" id="title" th:name="title">
+	<br>
+	<input type="submit" th:value="#{uiText.button.book.find}" value="Find a book!">
+</form>
+<br>
+
+<div th:if="${books != null && books.getTotalElements() > 0}">
+	<div th:each="book : ${books.getContent()}">
+		<p th:text="|${book.getTitle()}, ${book.getAuthor()}, ${book.getYear()}|"></p>
+
+		<div th:if="${book.getOwner() == null}">
+			<p th:text="#{uiText.p.book.noOwnerNoAssign}">This book is free. To whom should it be assigned?</p>
+		</div>
+
+		<div th:if="${book.getOwner() != null}">
+			<p th:text="#{uiText.p.book.owner(${book.getOwner().getFullName()})}">The book has an owner.</p>
+		</div>
+		<hr>
+	</div>
+</div>
+
+<div th:if="${books != null && books.getTotalElements() < 1}">
+	<p th:text="#{uiText.p.book.noBooks(${title})}"></p>
+</div>
+
+<div th:if="${isTitleBlank}">
+	<p style="color: red" th:text="#{uiText.p.book.titleIsBlank}"></p>
+</div>
+
+</body>
+</html>

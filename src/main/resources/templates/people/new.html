@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{uiText.title.people.new}">New person</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{new}" th:object="${person}">
+
+	<label for="lastName" th:text="#{uiText.label.person.lastName}">Last name: </label>
+	<input type="text" id="lastName" th:field="*{lastName}">
+	<div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name error</div>
+	<br>
+
+	<label for="firstName" th:text="#{uiText.label.person.firstName}">First name: </label>
+	<input type="text" id="firstName" th:field="*{firstName}">
+	<div style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</div>
+	<br>
+
+	<label for="middleName" th:text="#{uiText.label.person.middleName}">Middle name (if available): </label>
+	<input type="text" id="middleName" th:field="*{middleName}">
+	<div style="color: red" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}">Middle name error</div>
+	<br>
+
+	<label for="yearOfBirth" th:text="#{uiText.label.person.yearOfBirth}">Year of birth: </label>
+	<input type="text" minlength="4" maxlength="4" id="yearOfBirth" th:field="*{yearOfBirth}">
+	<div style="color: red" th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}">Year of birth error</div>
+	<br>
+	<div style="color: red" th:if="${#fields.hasGlobalErrors()}" th:text="#{person.exists}">Person already exists</div>
+	<input type="submit" th:value="#{uiText.button.person.create}" value="Create a person!">
+</form>
+
+</body>
+</html>

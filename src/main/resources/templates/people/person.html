@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="|${person.getFullName()}, ${person.yearOfBirth}|">Person</title>
+</head>
+<body>
+
+<div id="personMainInfo" th:text="|${person.getFullName()}, ${person.yearOfBirth}|"></div>
+
+<div th:if="${!person.hasBooks()}">
+	<p th:text="#{uiText.p.person.noBooks}">The person hasn't picked up any books yet</p>
+</div>
+<hr>
+<div th:if="${person.hasBooks()}">
+	<b th:text="#{uiText.b.person.hasBooks}">Books:</b>
+	<p th:each="book : ${person.books}" style="margin-top: 0; margin-bottom: 0" th:text="|${book.title}, ${book.getAuthor()}, ${book.getYear()}|"></p>
+</div>
+
+<hr>
+<!--TODO change method to GET. Not it used to trim question mark in the end of url-->
+<form th:method="POST" th:action="@{/people/person/{id}/edit(id=${person.getId()})}">
+	<input type="submit" th:value="#{uiText.button.person.edit}" value="Edit a person!">
+</form>
+
+<form th:method="DELETE" th:action="@{/people/person/{id}/delete(id=${person.getId()})}">
+	<input type="submit" th:value="#{uiText.button.person.delete}" value="Delete a person!">
+</form>
+
+</body>
+</html>

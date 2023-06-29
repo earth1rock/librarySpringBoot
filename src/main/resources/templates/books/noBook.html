@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{uiText.p.noBook}">Book does not exist</title>
+</head>
+<body>
+	<p th:text="#{uiText.p.noBook.id(${bookId})}">The book does not exist</p>
+	<a href="/books" th:text="#{uiText.a.noBook.linkText}">Go to books page</a>
+</body>
+</html>

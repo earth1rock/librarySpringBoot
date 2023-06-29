@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="#{uiText.title.books.edit}">Edit book</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/books/book/{id}/edit(id=${book.getId()})}" th:object="${book}">
+
+	<label for="title" th:text="#{uiText.label.book.title}">Book title: </label>
+	<input type="text" id="title" th:field="*{title}">
+	<div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error</div>
+	<br>
+
+	<label for="author" th:text="#{uiText.label.book.author}">Author: </label>
+	<input type="text" id="author" th:field="*{author}">
+	<div style="color: red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author error</div>
+	<br>
+
+	<label for="year" th:text="#{uiText.label.book.year}">Year: </label>
+	<input type="text" minlength="4" maxlength="4" id="year" th:field="*{year}">
+	<div style="color: red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Year name error</div>
+	<br>
+	<div style="color: red" th:if="${#fields.hasGlobalErrors()}" th:text="#{book.exists}">Book already exists</div>
+	<input type="submit" th:value="#{uiText.button.book.edit}" value="Edit a book!">
+</form>
+</body>
+</html>
